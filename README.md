@@ -10,10 +10,11 @@ This repo is used to build boot image for Hikey620 board.
   it misses HDMI/display related drivers.  For general development, you
   could directly use mainline kernel; for audio/video related
   development, please use John's branch for kernel building:
-
+  ~~~
   git clone https://git.linaro.org/people/john.stultz/android-dev.git
   cd android-dev
   git checkout -b hikey-mainline-WIP origin/dev/hikey-mainline-WIP
+  ~~~
 
 ## Build Image and dtb
 
@@ -21,16 +22,20 @@ This repo is used to build boot image for Hikey620 board.
   'config_dbg_audio_dmabuf' so that can enable audio/video related
   components:
 
+  ~~~
   cp config_dbg_audio_dmabuf android-dev/.config
   make oldconfig
   make -j8 Image dtbs
+  ~~~
 
 ## Generate boot.img and flash it on the board
 
+  ~~~
   cp android-dev/arch/arm64/boot/Image ./
   cp android-dev/arch/arm64/boot/dts/hisilicon/hi6220-hikey.dtb ./
 
   sh flash-boot.sh
+  ~~~
 
   In the shell script 'flash-boot.sh', it uses a relay5 to reboot the
   Hikey board and it will send character 'f' to the console so this
